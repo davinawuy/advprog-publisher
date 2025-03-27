@@ -112,3 +112,27 @@ Stuff I found helpful were:
 - Mock Servers: Simulate server responses for frontend or integration testing.
 
 #### Reflection Publisher-3
+
+1. Which variation of the Observer Pattern do we use in this tutorial case?
+
+I believe in this tutorial we are using a push model of the observer Pattern. When a product is created or deleted the system or publish will instantly push the update to all subscribers who have been assigned that product. This is done through the notification servie which has an notify() method. This results in a real-time update without the need to manually do it.
+
+2. What are the advantages and disadvantages of using the other variation of the Observer Pattern (Pull model) for this tutorial case?
+
+If the **Pull model** were used instead:
+
+**Advantages:**
+- Subscribers have more control, they can choose when to fetch updates.
+- Data transmission is reduced since subscribers only pull the data they need.
+- This may reduce the load on the publisher should the broadcast only need to be done every change or so.
+
+**Disadvantages:**
+- Each subscriber would need to implement logic to  check the publisher for updates.
+- The delay between change and retrieval introduces latency.
+- This approach creates tighter dependency between subscribers and the publisher, increasing code complexity.
+
+There may not be any inherent benefit from using the pull method.
+
+3. What will happen to the program if we decide to not use multi-threading in the notification process?
+
+Basically, the program will be very slow since it notifies each user sequentially so it will consume alot of time and be delayed if there are alot of users. This will make it both less responsive which may fail the need for a notification. Furthermore, this will be harder to scale since it grows in a linear way if multithread is not used then it will get slower as more subscribers join.
