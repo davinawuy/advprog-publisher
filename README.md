@@ -91,4 +91,24 @@ A singleton guarantees that only instance of subscribers exists globally but it 
 
 #### Reflection Publisher-2
 
+1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+
+The most basic reason would be to adhere to the SRP or single responsibility principle. This means that each component has its own role. The repository layer manages data access and database access. It also isolates the data storing from the rest of the application. The service layer deals with business logic independent of data storage concerns. It acts as the bridge between Controller and Repository. The reason we use SRP is to ensure that it is easier to maintain, scale, and understand. It also helps isolate items to prevent confusion during debugging.
+
+2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+
+Using only the model may not be the best choice since it can increase code complexity since it handles all responsibilities. It can also duplicate certain functions making them redundant. It also will force tighter dependency between each other and it strictly locks the scalability of the program since a small change will require a complete edit of everything else in model. Overall refactoring, updating, and etc will be overall harder.
+
+3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+
+I have explored Postman a bit more, the features I found helpful were the ones that help simulate behaviours of the server and HTTP interactions.
+
+Stuff I found helpful were:
+
+- Environment Variables: Switch between dev/staging/production environments easily.
+
+- Collections: Organize and group related API requests.
+
+- Mock Servers: Simulate server responses for frontend or integration testing.
+
 #### Reflection Publisher-3
