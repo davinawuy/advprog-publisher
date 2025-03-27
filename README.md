@@ -77,6 +77,17 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?
+
+In a observer pattern a trait defines the common methods like update() for example. In the example Bambangshop all subscribers exist as external rocket instances. Then notifications are sent via HTTP POST instead of method calls. Since there is no inherent need for polymorphism or any method overriding a trait in this case is not needed. A single model struct should be enough.
+
+2. id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case?
+
+A Dashmap ensures the uniqueness of keys or id for the program and url for subscriber. Vec would require a manual iteration to check for duplicates which may not be the best choice. DashMap supports faster lookups and concurrent access. This is ideal for multi-threaded environments  where multiple threads manage subscribers.
+
+3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
+
+A singleton guarantees that only instance of subscribers exists globally but it does not ensure thread safety it only guarantees single instantiation not safe concurrent access. This is where something like a DashMap becomes useful since a DashMap is thread-safe concurrent HashMap designed to handle multiple readers and writers. It will allow safe operations across multi-threaded which is ideal where different threads may be adding or removing subscribers. So while the implementation of a singleton like lazy_static! which allows for a single global instance is useful it must be paired with thread-safe structure like DashMap.
 
 #### Reflection Publisher-2
 
